@@ -15,12 +15,12 @@ class ModelTest(unittest.TestCase):
         #del mockModel()
         pass
 
-    def testModelInit(self):
+    def test0ModelInit(self):
         mockModel = Model(":memory:")
         result = mockModel.setup()
         self.assertTrue(result, "Should return true on successful db creation")
 
-    def test0(self):
+    def test0z(self):
         mockUID = mockModel.addUser("foo bar")
         self.assertEqual("foo bar", mockModel.getUser(mockUID), "Calling a user ID should return that user")
 

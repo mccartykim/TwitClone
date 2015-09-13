@@ -2,10 +2,14 @@ import sqlite3
 
 class Model:
     def __init__(self, dburl):
-        self.con = sqlite3.connect("database.db")
+        self.con = sqlite3.connect(dburl)
 
     def setup(self):
-        return None
+        cur = self.con.cursor()
+        cur.execute("CREATE TABLE users (uid blob PRIMARY KEY, username varchar(28))")
+        cur.execute("CREATE TABLE posts (pid blob PRIMARY KEY, uid blob, message text, postedAt integer DEFAULT CURRENT_TIMESTAMP, FOREIGN KEY (uid) REFERENCES users(uid))")
+        self.con.commit()
+        return True
     
     def close(self):
         self.con.close()
